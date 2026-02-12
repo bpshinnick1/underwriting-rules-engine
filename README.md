@@ -256,41 +256,41 @@ Every decision logged with:
 | Metric | Result | Industry Benchmark |
 |--------|--------|-------------------|
 | **Total Applications** | 1,000 | - |
-| **Accepted** | 180 (18.0%) | 40-50% target |
-| **Referred** | 492 (49.2%) | 30-40% target |
-| **Declined** | 328 (32.8%) | 10-20% target |
-| **Straight-Through Rate** | 18.0% | 40-50% |
-| **Average Revenue (Accepted)** | £180,872 | - |
-| **Claims-Free Rate** | 64.4% | 70%+ target |
-| **Total Exposure** | £128.5M | - |
+| **Accepted** | 238 (23.8%) | 40-50% target |
+| **Referred** | 454 (45.4%) | 30-40% target |
+| **Declined** | 308 (30.8%) | 10-20% target |
+| **Straight-Through Rate** | 23.8% | 40-50% |
+| **Average Revenue (Accepted)** | £344,770 | - |
+| **Claims-Free Rate** | 69.7% | 70%+ target |
+| **Total Exposure** | £82.1M | - |
 
 ### Decision Breakdown
 
 **Top 3 Referral Drivers:**
-1. **Tier 2 Industry (61.0%)** - 300 applications requiring specialist assessment
-2. **Claims Investigation (8.1%)** - 40 applications with 2 claims needing review  
-3. **New Business (7.9%)** - 39 startups requiring business plan evaluation
+1. **Tier 2 Industry (53.1%)** - 241 applications requiring specialist assessment
+2. **Claims Investigation (9.0%)** - 41 applications with 2 claims needing review  
+3. **New Business (9.0%)** - 41 startups requiring business plan evaluation
 
 **Top 3 Decline Reasons:**
-1. **Revenue Below Minimum (38.1%)** - 125 applications insufficient premium
-2. **Prohibited Industry (36.6%)** - 120 Tier 3 applications outside appetite
-3. **Adverse Claims History (13.1%)** - 43 applications with 3+ claims
+1. **Prohibited Industry (45.5%)** - 140 Tier 3 applications outside appetite
+2. **Adverse Claims History (25.0%)** - 77 applications with 3 claims
+3. **Startup Business (14.3%)** - 44 applications with insufficient trading history
 
 ### Portfolio Composition (Accepted Risks)
 
 **Industry Distribution:**
-- Professional Services - Accounting: 29 policies (16.1%)
-- Technology - Software Development: 26 policies (14.4%)
-- Food & Beverage - Coffee Shop: 25 policies (13.9%)
-- Retail - Electronics: 22 policies (12.2%)
-- Healthcare - Medical Practice: 20 policies (11.1%)
+- Professional Services - Accounting: 31 policies (13.0%)
+- Retail - Electronics: 26 policies (10.9%)
+- Technology - Software Development: 23 policies (9.7%)
+- Healthcare - Medical Practice: 21 policies (8.8%)
+- Technology - IT Services: 20 policies (8.4%)
 
 **Geographic Distribution:**
-- Edinburgh: 18 policies (10.0%)
-- Liverpool: 16 policies (8.9%)
-- London: 15 policies (8.3%)
-- Manchester: 14 policies (7.8%)
-- Nottingham: 14 policies (7.8%)
+- Cambridge: 21 policies (8.8%)
+- Nottingham: 21 policies (8.8%)
+- Birmingham: 21 policies (8.8%)
+- Bristol: 21 policies (8.8%)
+- Glasgow: 19 policies (8.0%)
 
 ---
 
@@ -467,11 +467,11 @@ underwriting-rules-engine/
 
 ### 1. Low Acceptance Rate is Strategic
 
-**The 18% straight-through rate appears low, but reflects intentional design:**
+**The 23.8% straight-through rate appears low, but reflects intentional design:**
 
-- **Tier 2 Industries (61% of referrals)** - Construction and manufacturing require specialist assessment. The engine correctly identifies when human expertise is needed rather than auto-accepting complex risks.
+- **Tier 2 Industries (53% of referrals)** - Construction and manufacturing require specialist assessment. The engine correctly identifies when human expertise is needed rather than auto-accepting complex risks.
 
-- **Premium Adequacy (38% of declines)** - Businesses under £50K don't generate sufficient premium to justify underwriting costs. This demonstrates commercial awareness beyond pure risk assessment.
+- **Premium Adequacy (1.6% of declines)** - Businesses under £50K don't generate sufficient premium to justify underwriting costs. This demonstrates commercial awareness beyond pure risk assessment.
 
 - **Risk Quality (100% Tier 1 accepted)** - Every auto-accepted application is low-risk. This strict selection ensures portfolio quality, which is the primary goal of underwriting automation.
 
@@ -494,9 +494,9 @@ underwriting-rules-engine/
 ### 3. Revenue Thresholds Control Portfolio Shape
 
 **Small businesses create operational challenge:**
-- 38% of declines are revenue-driven
-- Minimum threshold (£50K) eliminates 125 unprofitable applications
-- Maximum threshold (£10M) prevents concentration risk from 9 large exposures
+- 1.6% of declines are revenue-driven
+- Minimum threshold (£50K) eliminates unprofitable applications
+- Maximum threshold (£10M) prevents concentration risk from large exposures
 
 **This mirrors real insurer behavior** - SME platforms explicitly target the £100K-£2M revenue sweet spot where premium justifies effort.
 
@@ -505,8 +505,8 @@ underwriting-rules-engine/
 ### 4. Claims History Has Long Memory
 
 **Multi-claim businesses face automatic decline:**
-- 3+ claims in 5 years → 56 applications declined
-- 2 claims → 40 applications referred for investigation
+- 3+ claims in 5 years → 119 applications declined (77 with 3 claims, 42 with 4 claims)
+- 2 claims → 41 applications referred for investigation
 - Pattern-based rejection prevents adverse selection
 
 **Underwriting principle**: Past losses are the best predictor of future losses. Once a pattern emerges, fundamental risk management issues exist.
@@ -516,10 +516,10 @@ underwriting-rules-engine/
 ### 5. Portfolio Composition Reflects Rules
 
 **Accepted portfolio shows strong diversification:**
-- No single industry >16% of policies
-- Geographic spread across 10+ cities
-- Average revenue £181K (small business focus)
-- 64% claims-free (high quality)
+- No single industry >13% of policies
+- Geographic spread across 15 cities
+- Average revenue £344,770 (SME focus)
+- 69.7% claims-free (high quality)
 
 **Real-world application**: Rules automatically enforce portfolio management objectives without manual intervention.
 
@@ -605,6 +605,7 @@ This project simulates commercial insurance underwriting for educational and por
 **Last Updated**: February 2026  
 **Development Status**: Portfolio project, actively maintained
 
+---
 
 <div align="center">
 
@@ -612,6 +613,10 @@ This project simulates commercial insurance underwriting for educational and por
 
 *Demonstrating that underwriting is about balancing multiple objectives:*  
 *risk quality, operational efficiency, growth targets, and capacity constraints*
+
+[⬆ Back to Top](#-automated-underwriting-rules-engine)
+
+</div>
 
 [⬆ Back to Top](#-automated-underwriting-rules-engine)
 
