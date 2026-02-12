@@ -122,6 +122,20 @@ Every decision logged with:
 - Timestamp and processing metadata
 - Supporting data for regulatory compliance
 
+### 5. **Risk Scoring Engine (0-100)**
+Numerical risk scores complement binary decisions:
+- Weighted composite across all 6 factors
+- Risk bands: Excellent / Good / Moderate / Poor / Unacceptable
+- Differentiates quality within ACCEPT/REFER/DECLINE groups
+- Sub-score transparency shows which factors drive the score
+
+### 6. **A/B Testing Framework**
+Compare rule configurations to measure impact:
+- 4 pre-built experiments (revenue, claims, age, industry reclassification)
+- Side-by-side comparison of acceptance rate, portfolio quality, and premium volume
+- Decision migration tracking (how many applications changed outcome)
+- Fully configurable for custom experiments
+
 ---
 
 ## 🏗️ Project Architecture
@@ -147,19 +161,19 @@ Every decision logged with:
 └─────────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│                    DECISION ENGINE LAYER                         │
-│  • Orchestrates rule evaluation                                 │
-│  • Applies priority-based decision logic                        │
+│                    DECISION + SCORING LAYER                      │
+│  • Orchestrates rule evaluation (DECLINE > REFER > ACCEPT)     │
+│  • Risk scoring engine (0-100 weighted composite)              │
 │  • Generates comprehensive audit trail                          │
-│  • Produces decision dataset with reasons                       │
+│  • Risk band classification (Excellent → Unacceptable)         │
 └─────────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│                    ANALYTICS LAYER                               │
-│  • Portfolio composition analysis                               │
-│  • Decision pattern identification                              │
-│  • Rule performance metrics                                     │
-│  • Executive summary generation                                 │
+│                    ANALYTICS + A/B TESTING LAYER                 │
+│  • Portfolio composition analysis and dashboards               │
+│  • A/B testing framework for rule calibration                  │
+│  • Decision migration tracking between configurations          │
+│  • Automated experiment recommendations                        │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -322,6 +336,84 @@ Every decision logged with:
 
 ---
 
+## 🎯 Risk Scoring Engine
+
+Each application receives a composite risk score (0-100) based on weighted sub-factors:
+
+| Factor | Weight | Rationale |
+|--------|--------|-----------|
+| **Industry Tier** | 25% | Strongest predictor of loss type |
+| **Claims History** | 25% | Strongest predictor of loss frequency |
+| **Revenue Band** | 15% | Premium adequacy & exposure size |
+| **Business Maturity** | 15% | Operational stability indicator |
+| **Coverage Ratio** | 10% | Proportionality & moral hazard signal |
+| **Geographic Risk** | 10% | Location-based hazard modifier |
+
+### Score Distribution
+
+| Risk Band | Score Range | Count | Percentage |
+|-----------|------------|-------|------------|
+| **Excellent** | 80-100 | 442 | 44.2% |
+| **Good** | 60-79 | 368 | 36.8% |
+| **Moderate** | 40-59 | 181 | 18.1% |
+| **Poor** | 20-39 | 9 | 0.9% |
+| **Unacceptable** | 0-19 | 0 | 0.0% |
+
+**Mean Score**: 75.7 | **Median**: 77.2 | **Std Dev**: 16.1
+
+### Score vs Decision
+Risk scores provide granularity within decision categories — two "REFER" applications may score very differently, helping underwriters prioritise their review queue.
+
+---
+
+## 🧪 A/B Testing Framework
+
+The framework compares rule configurations ("Control" vs "Variant") to measure the impact of proposed rule changes — exactly how real insurers calibrate automated underwriting.
+
+### Experiment Results
+
+**Test 1: Lower Revenue Floor** (£50K → £25K)
+| Metric | Control | Variant | Delta |
+|--------|---------|---------|-------|
+| Accept Rate | 23.8% | 24.1% | +0.3pp |
+| Claims-Free Rate | 69.7% | 69.7% | 0.0pp |
+| Est. Premium | £1.23M | £1.23M | +£1.9K |
+
+*Verdict*: Minimal impact — few applications fall in the £25K-£50K range.
+
+**Test 2: Relaxed Claims Tolerance** (1 → 2 claims accepted for Tier 1)
+| Metric | Control | Variant | Delta |
+|--------|---------|---------|-------|
+| Accept Rate | 23.8% | 26.8% | +3.0pp |
+| Claims-Free Rate | 69.7% | 61.9% | -7.8pp |
+| Est. Premium | £1.23M | £1.39M | +£159K |
+
+*Verdict*: ⚠️ +30 policies and +£159K premium, but claims-free rate drops nearly 8pp. Classic volume vs quality trade-off.
+
+**Test 3: Younger Business Acceptance** (2yr → 1yr minimum)
+| Metric | Control | Variant | Delta |
+|--------|---------|---------|-------|
+| Accept Rate | 23.8% | 27.9% | +4.1pp |
+| Claims-Free Rate | 69.7% | 70.3% | +0.5pp |
+| Est. Premium | £1.23M | £1.46M | +£228K |
+
+*Verdict*: ✅ Best experiment — +41 policies with no quality degradation. Strong candidate for deployment.
+
+**Test 4: Reclassify Electrical Contractors** (Tier 2 → Tier 1)
+| Metric | Control | Variant | Delta |
+|--------|---------|---------|-------|
+| Accept Rate | 23.8% | 25.5% | +1.7pp |
+| Claims-Free Rate | 69.7% | 68.2% | -1.5pp |
+| Est. Premium | £1.23M | £1.33M | +£103K |
+
+*Verdict*: ✅ Moderate gain with acceptable quality trade-off.
+
+### A/B Test Visualization
+![A/B Test: Younger Business](dashboards/ab_test_younger_business_acceptance.png)
+*Example A/B comparison showing decision rate shifts, score distribution, and portfolio quality impact*
+
+---
+
 ## 💻 Technology Stack
 
 **Core Technologies:**
@@ -374,8 +466,14 @@ python data_generator.py --num_applications 1000
 # 2. Run decision engine
 python decision_engine.py
 
-# 3. Generate analytics dashboard
+# 3. Score all applications (0-100)
+python risk_scorer.py
+
+# 4. Generate analytics dashboard
 python dashboard.py
+
+# 5. Run A/B testing experiments
+python ab_testing.py
 
 # View results in dashboards/ folder
 ```
@@ -412,7 +510,7 @@ Test individual rules, create custom scenarios, experiment with thresholds.
 # Run unit tests
 pytest tests/test_rules.py -v
 
-# Expected: 30+ tests passing
+# Expected: 77 tests passing
 ```
 
 ---
@@ -435,7 +533,9 @@ underwriting-rules-engine/
 ├── src/                               # Source code
 │   ├── data_generator.py              # Synthetic data creation
 │   ├── risk_rules.py                  # 6 underwriting rules
+│   ├── risk_scorer.py                 # Risk scoring engine (0-100)
 │   ├── decision_engine.py             # Decision orchestration
+│   ├── ab_testing.py                  # A/B testing framework
 │   └── dashboard.py                   # Analytics & visualization
 │
 ├── notebooks/                         # Jupyter notebooks
@@ -528,6 +628,7 @@ underwriting-rules-engine/
 ## 🔮 Future Enhancements
 
 ### Phase 1: Intelligence Layer
+- [x] **Risk Scoring Engine** - Weighted composite scoring (0-100) across all 6 factors ✅
 - [ ] **Machine Learning Risk Scoring** - Train predictive model on historical loss data to augment rules
 - [ ] **Natural Language Processing** - Extract risk indicators from business descriptions
 - [ ] **Anomaly Detection** - Flag unusual applications for enhanced review
@@ -543,7 +644,7 @@ underwriting-rules-engine/
 - [ ] **Dynamic Reinsurance** - Adjust appetite based on treaty capacity
 
 ### Phase 4: Optimization
-- [ ] **A/B Testing Framework** - Test rule variations and measure impact on loss ratios
+- [x] **A/B Testing Framework** - Test rule variations and measure impact on portfolio metrics ✅
 - [ ] **Reinforcement Learning** - Optimize thresholds based on historical performance
 - [ ] **Multi-Objective Optimization** - Balance growth, profitability, and risk simultaneously
 
@@ -551,26 +652,10 @@ underwriting-rules-engine/
 
 ## 👤 Author
 
-**Ben Shinnick**
-
-Economics & Management graduate (University of Sussex, 2:1) transitioning into commercial insurance underwriting. Combining analytical skills with insurance domain knowledge to build practical industry projects.
-
 **Connect:**
 - 📧 Email: benpshinnick@outlook.com
 - 💼 LinkedIn: [linkedin.com/in/ben-shinnick-674969252](https://linkedin.com/in/ben-shinnick-674969252/)
 - 💻 GitHub: [github.com/bpshinnick1](https://github.com/bpshinnick1)
-
-**Background:**
-- DataCamp Data Analyst Associate Certified (Jan 2026)
-- Strong SQL, Python, Power BI, and Tableau skills
-- Hands-on experience with PostgreSQL, DAX, data modeling
-- Completed end-to-end analytics projects using real business data
-
-**Current Focus:**
-- Studying for CII IF1 (Insurance, Legal & Regulatory)
-- Building practical insurance industry knowledge
-- Networking within commercial insurance sector
-- Targeting graduate underwriting schemes and assistant underwriter roles
 
 ---
 
@@ -613,10 +698,6 @@ This project simulates commercial insurance underwriting for educational and por
 
 *Demonstrating that underwriting is about balancing multiple objectives:*  
 *risk quality, operational efficiency, growth targets, and capacity constraints*
-
-[⬆ Back to Top](#-automated-underwriting-rules-engine)
-
-</div>
 
 [⬆ Back to Top](#-automated-underwriting-rules-engine)
 
