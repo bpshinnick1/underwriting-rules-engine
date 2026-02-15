@@ -11,7 +11,7 @@ An end-to-end commercial insurance underwriting decision engine that automates r
 
 ---
 
-## 📊 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Business Context](#business-context)
@@ -29,7 +29,7 @@ An end-to-end commercial insurance underwriting decision engine that automates r
 
 ---
 
-## 🎯 Overview
+## Overview
 
 In commercial insurance, underwriters evaluate thousands of applications daily to decide whether to **accept** risk, **refer** for manual review, or **decline**. This project builds an automated decision engine that replicates this workflow, processing 1,000 SME insurance applications through a 6-factor risk assessment framework.
 
@@ -48,7 +48,7 @@ In commercial insurance, underwriters evaluate thousands of applications daily t
 
 ---
 
-## 💼 Business Context
+## Business Context
 
 ### The Underwriting Challenge
 
@@ -87,7 +87,7 @@ This approach is used by:
 
 ---
 
-## 🔑 Key Features
+## Key Features
 
 ### 1. **Multi-Factor Risk Assessment**
 Six independent rules evaluate each application:
@@ -138,7 +138,7 @@ Compare rule configurations to measure impact:
 
 ---
 
-## 🏗️ Project Architecture
+## Project Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -179,7 +179,7 @@ Compare rule configurations to measure impact:
 
 ---
 
-## ⚖️ Underwriting Rules
+## Underwriting Rules
 
 ### Rule 1: Industry Classification
 
@@ -263,7 +263,7 @@ Compare rule configurations to measure impact:
 
 ---
 
-## 📈 Results & Analytics
+## Results & Analytics
 
 ### Executive Summary
 
@@ -308,7 +308,7 @@ Compare rule configurations to measure impact:
 
 ---
 
-## 📊 Dashboard Screenshots
+## Dashboard Screenshots
 
 ### Decision Distribution
 ![Decision Distribution](dashboards/decision_distribution.png)
@@ -336,7 +336,7 @@ Compare rule configurations to measure impact:
 
 ---
 
-## 🎯 Risk Scoring Engine
+## Risk Scoring Engine
 
 Each application receives a composite risk score (0-100) based on weighted sub-factors:
 
@@ -366,7 +366,7 @@ Risk scores provide granularity within decision categories — two "REFER" appli
 
 ---
 
-## 🧪 A/B Testing Framework
+## A/B Testing Framework
 
 The framework compares rule configurations ("Control" vs "Variant") to measure the impact of proposed rule changes — exactly how real insurers calibrate automated underwriting.
 
@@ -414,7 +414,7 @@ The framework compares rule configurations ("Control" vs "Variant") to measure t
 
 ---
 
-## 💻 Technology Stack
+## Technology Stack
 
 **Core Technologies:**
 - **Python 3.10+** - Primary programming language
@@ -433,7 +433,7 @@ The framework compares rule configurations ("Control" vs "Variant") to measure t
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -515,7 +515,7 @@ pytest tests/test_rules.py -v
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 underwriting-rules-engine/
@@ -563,7 +563,7 @@ underwriting-rules-engine/
 
 ---
 
-## 💡 Key Insights
+## Key Insights
 
 ### 1. Low Acceptance Rate is Strategic
 
@@ -625,7 +625,7 @@ underwriting-rules-engine/
 
 ---
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 ### Phase 1: Intelligence Layer
 - [x] **Risk Scoring Engine** - Weighted composite scoring (0-100) across all 6 factors ✅
@@ -650,7 +650,7 @@ underwriting-rules-engine/
 
 ---
 
-## 👤 Author
+## Author
 
 **Connect:**
 - 📧 Email: benpshinnick@outlook.com
@@ -659,13 +659,13 @@ underwriting-rules-engine/
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 **Underwriting Principles:**
 - Risk appetite framework based on industry best practices from traditional insurers (Zurich, AIG, AXA)
@@ -681,7 +681,7 @@ This project simulates commercial insurance underwriting for educational and por
 
 ---
 
-## 📊 Project Status
+## Project Status
 
 ![Status](https://img.shields.io/badge/Status-Complete-success.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)
